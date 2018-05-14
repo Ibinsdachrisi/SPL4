@@ -1,29 +1,126 @@
 public class Game {
 
     public static void main(String[] args) {
-        int [][] fieldI = new int [3][3];
+        int [][] fieldI = new int [10][10];
+
+        //System.out.println(fieldI.length);
         int bomben = 2;
-        char [][] fieldC = new char [3][3];
+
+
+        //
 
         for (int i = 0; i < bomben; i++) {
-            fieldI = setbomb(fieldI, RandField(fieldI.length));
+            fieldI = setbomb(fieldI);
         }
+        output2(fieldI);
 
     }
 
-    //Methode
+    //Methodes
 
     public static int[] RandField(int lenght){
         int [] zw = new int[2];
         zw[0] = (int) (Math.random()*lenght);
-        System.out.println(zw[0]);
+        //System.out.println(zw[0]);
         zw[1] = (int) (Math.random()*lenght);
-        System.out.println(zw[1]);
+        //System.out.println(zw[1]);
+        //zw[0] = 3;
+        //zw[1] = 3;
         return zw;
     }
-    public static int[][] setbomb (int [][] fieldI , int [] cord){
+
+
+    public static int[][] setbomb (int [][] fieldI){
+        int wid = 0;
+        int[] cord = new int[2];
+        do {
+            wid = 0;
+            cord = RandField(fieldI.length);
+            if (fieldI[cord[0]][cord[1]] == 1) {
+            wid = 1;
+            }
+        }while (wid == 1);
         fieldI[cord[0]][cord[1]] = 1;
         return fieldI;
     }
-    //public static void output()
+
+
+    public static void output(int [][] fieldJ){
+        for (int i = 0; i < fieldJ.length; i++) {
+
+            for (int j = 0; j < fieldJ.length; j++) {
+                System.out.print(fieldJ[i][j] + " ");
+            }
+
+            System.out.println("");
+
+        }
+    }
+    public static void output2(int [][] fieldJ){
+        String [][] fieldS = new String [fieldJ.length][fieldJ.length];
+        for (int i = 0; i < fieldJ.length; i++) {
+            for (int j = 0; j < fieldJ.length; j++) {
+                fieldS[i][j] = "[ ]";
+            }
+        }
+        int[][] field2 = new int[fieldJ.length][fieldJ.length];
+        for (int i = 0; i < fieldJ.length; i++) {
+            for (int j = 0; j < fieldJ.length; j++) {
+
+                if (fieldJ[i][j] == 1){
+                    if(i-1 < 0 || j+1 > fieldJ.length-1 ){
+
+                    }else{
+                        field2[i-1][j+1]++;
+                    }
+                    //
+                    if(j+1 > fieldJ.length-1){
+
+                    }else{
+                        field2[i][j+1]++;
+                    }
+                    //
+                    if(i+1 > fieldJ.length-1||j+1 > fieldJ.length-1){
+
+                    }else{
+                        field2[i+1][j+1]++;
+                    }
+                    //
+                    if(i+1 > fieldJ.length-1){
+
+                    }else{
+                        field2[i+1][j]++;
+                    }
+                    //
+                    if(i +1 > fieldJ.length-1 || j-1 < 0 ){
+
+                    }else{
+                        field2[i+1][j-1]++;
+                    }
+                    //
+                    if(j-1 < 0 ){
+
+                    }else{
+                        field2[i][j-1]++;
+                    }
+                    //
+                    if(i -1< 0 || j-1 < 0 ){
+
+                    }else{
+                        field2[i-1][j-1]++;
+                    }
+                    //
+                    if(i -1< 0 || i-1 > fieldJ.length-1){
+
+                    }else{
+                        field2[i-1][j]++;
+                    }
+                    //
+
+                }
+            }
+        }
+        output(field2);
+    }
+
 }
