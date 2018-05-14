@@ -1,19 +1,20 @@
 public class Game {
 
     public static void main(String[] args) {
-        int [][] fieldI = new int [10][10];
+        //for (int y = 0; y < 1000000; y++){
+            int [][] fieldI = new int [10][10];
+            int bomben = 2;
 
-        //System.out.println(fieldI.length);
-        int bomben = 2;
 
+            //
 
-        //
-
-        for (int i = 0; i < bomben; i++) {
-            fieldI = setbomb(fieldI);
-        }
-        output2(fieldI);
-
+            for (int i = 0; i < bomben; i++) {
+                fieldI = setbomb(fieldI);
+            }
+            output(fieldI);
+            output2(fieldI);
+            System.out.println("------------------");
+        //}
     }
 
     //Methodes
@@ -30,7 +31,8 @@ public class Game {
     }
 
 
-    public static int[][] setbomb (int [][] fieldI){
+    public static int[][] setbomb (int [][] fieldI2){
+        int [][]fieldI = new int[fieldI2.length][fieldI2.length];
         int wid = 0;
         int[] cord = new int[2];
         do {
@@ -56,8 +58,20 @@ public class Game {
 
         }
     }
-    public static void output2(int [][] fieldJ){
-        String [][] fieldS = new String [fieldJ.length][fieldJ.length];
+    public static void output(String [][] fieldS){
+        for (int i = 0; i < fieldS.length; i++) {
+
+            for (int j = 0; j < fieldS.length; j++) {
+                System.out.print(fieldS[i][j] + " ");
+            }
+
+            System.out.println("");
+
+        }
+    }
+    public static void output2(int [][] fieldJ) {
+        // fieldJ fieldS field2
+        String[][] fieldS = new String[fieldJ.length][fieldJ.length];
         for (int i = 0; i < fieldJ.length; i++) {
             for (int j = 0; j < fieldJ.length; j++) {
                 fieldS[i][j] = "[ ]";
@@ -67,60 +81,78 @@ public class Game {
         for (int i = 0; i < fieldJ.length; i++) {
             for (int j = 0; j < fieldJ.length; j++) {
 
-                if (fieldJ[i][j] == 1){
-                    if(i-1 < 0 || j+1 > fieldJ.length-1 ){
+                if (fieldJ[i][j] == 1) {
+                    if (i - 1 < 0 || j + 1 > fieldJ.length - 1) {
 
-                    }else{
-                        field2[i-1][j+1]++;
+                    } else {
+                        field2[i - 1][j + 1]++;
                     }
                     //
-                    if(j+1 > fieldJ.length-1){
+                    if (j + 1 > fieldJ.length - 1) {
 
-                    }else{
-                        field2[i][j+1]++;
+                    } else {
+                        field2[i][j + 1]++;
                     }
                     //
-                    if(i+1 > fieldJ.length-1||j+1 > fieldJ.length-1){
+                    if (i + 1 > fieldJ.length - 1 || j + 1 > fieldJ.length - 1) {
 
-                    }else{
-                        field2[i+1][j+1]++;
+                    } else {
+                        field2[i + 1][j + 1]++;
                     }
                     //
-                    if(i+1 > fieldJ.length-1){
+                    if (i + 1 > fieldJ.length - 1) {
 
-                    }else{
-                        field2[i+1][j]++;
+                    } else {
+                        field2[i + 1][j]++;
                     }
                     //
-                    if(i +1 > fieldJ.length-1 || j-1 < 0 ){
+                    if (i + 1 > fieldJ.length - 1 || j - 1 < 0) {
 
-                    }else{
-                        field2[i+1][j-1]++;
+                    } else {
+                        field2[i + 1][j - 1]++;
                     }
                     //
-                    if(j-1 < 0 ){
+                    if (j - 1 < 0) {
 
-                    }else{
-                        field2[i][j-1]++;
+                    } else {
+                        field2[i][j - 1]++;
                     }
                     //
-                    if(i -1< 0 || j-1 < 0 ){
+                    if (i - 1 < 0 || j - 1 < 0) {
 
-                    }else{
-                        field2[i-1][j-1]++;
+                    } else {
+                        field2[i - 1][j - 1]++;
                     }
                     //
-                    if(i -1< 0 || i-1 > fieldJ.length-1){
+                    if (i - 1 < 0 || i - 1 > fieldJ.length - 1) {
 
-                    }else{
-                        field2[i-1][j]++;
+                    } else {
+                        field2[i - 1][j]++;
                     }
                     //
 
                 }
             }
         }
-        output(field2);
+        for (int i = 0; i < fieldJ.length; i++) {
+            for (int j = 0; j < fieldJ.length; j++) {
+                if (fieldJ[i][j] == 1) {
+                    field2[i][j] = 9;
+                }
+            }
+        }
+        //////
+        for (int i = 0; i < fieldJ.length; i++) {
+            for (int j = 0; j < fieldJ.length; j++) {
+                if (field2[i][j] != 0 && field2[i][j] != 9) {
+                    fieldS[i][j] = "["+ field2[i][j] + "]";
+                }
+            }
+        }
+
+        output(fieldS);
     }
+
+
 
 }
